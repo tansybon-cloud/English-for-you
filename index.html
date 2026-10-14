@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="km" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English for You | Complete LMS and Masterclass Portal (Units 1-12)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div id="user-badge" class="user-badge">👤 អ្នកទស្សនា</div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 ប្តូរពណ៌ (Dark/Light Mode)</button>
+        <h1>📚 English for You | Complete LMS and Masterclass Portal</h1>
+        <p>ប្រព័ន្ធបណ្តុំមេរៀនពេញលេញ (Unit 1 - 12 រួមទាំងកម្រិតមូលដ្ឋាន និងកម្រិតខ្ពស់)</p>
+        <p style="margin-top: 0.45rem; opacity: 0.9; font-weight: 600;">✨ របៀបរៀនសាកល្បងថ្មី • ប្រកបដោយការសិក្សាបានល្អជាងមុន</p>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('curriculum', event)">📖 បណ្តុំមេរៀន (Curriculum)</button>
+            <button class="tab-btn" onclick="switchTab('auth', event)">🔐 ចូល / ចុះឈ្មោះ</button>
+            <button class="tab-btn" onclick="switchTab('pedagogy', event)">👨‍🏫 វិធីសាស្ត្របង្រៀន (PPP)</button>
+            <button class="tab-btn" onclick="switchTab('review', event)">✍️ រំលឹកមេរៀន (Review Hub)</button>
+            <button class="tab-btn" onclick="switchTab('matching', event)">🎮 លំហាត់ផ្គូផ្គងពាក្យ (Matching Game)</button>
+            <button class="tab-btn" onclick="switchTab('admin', event)">🛠️ គ្រប់គ្រងមេរៀន (Admin & Backup)</button>
+        </div>
+
+        <!-- STATS BAR -->
+        <div class="stats-box">
+            <div class="stat-card">
+                <p>⭐ ផ្កាយសរុប (Stars)</p>
+                <h3 id="stat-stars">0</h3>
+            </div>
+            <div class="stat-card">
+                <p>✅ លំហាត់បានឆ្លើយត្រូវ</p>
+                <h3 id="stat-solved">0</h3>
+            </div>
+            <div class="stat-card">
+                <p>📚 មេរៀនសរុបក្នុងប្រព័ន្ធ</p>
+                <h3 id="stat-lessons">8</h3>
+            </div>
+        </div>
+
+        <div class="dashboard-panel">
+            <div class="dashboard-grid">
+                <div class="overview-card highlight">
+                    <span class="badge">Your Learning Path</span>
+                    <h3>Student Dashboard</h3>
+                    <p>បន្តចូលរៀន Unit 4 - 5 និងធ្វើវគ្គ Review ដើម្បីទទួលបានផ្កាយបន្ថែម។</p>
+                    <div class="mini-actions">
+                        <button class="btn" onclick="switchTab('curriculum', event)">Continue Learning</button>
+                        <button class="btn btn-print" onclick="switchTab('review', event)">Take the Review Quiz</button>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <p><strong>Progress</strong></p>
+                    <div class="ring"><span>72%</span></div>
+                    <div class="small-label"><span>Course Completion</span><span>72%</span></div>
+                </div>
+                <div class="overview-card">
+                    <p><strong>This Week's Focus</strong></p>
+                    <div class="progress-wrap">
+                        <div class="small-label"><span>Grammar</span><span>85%</span></div>
+                        <div class="progress-bar"><span class="progress-fill" style="width: 85%"></span></div>
+                    </div>
+                    <div class="progress-wrap">
+                        <div class="small-label"><span>Speaking</span><span>66%</span></div>
+                        <div class="progress-bar"><span class="progress-fill" style="width: 66%"></span></div>
+                    </div>
+                    <div class="progress-wrap">
+                        <div class="small-label"><span>Vocabulary</span><span>79%</span></div>
+                        <div class="progress-bar"><span class="progress-fill" style="width: 79%"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 1: CURRICULUM -->
+        <div id="tab-curriculum" class="tab-content">
+            <div class="card">
+                <h2>
+                    <span>🔍 ស្វែងរកមេរៀន និងព្រីនកិច្ចតែងការ</span>
+                    <button class="btn btn-print" onclick="window.print()">🖨️ ព្រីនកិច្ចតែងការ (Print on A4)</button>
+                </h2>
+                <div class="search-controls" style="margin-top: 1rem;">
+                    <select id="book-select" class="select-input" onchange="renderLessons()">
+                        <option value="all">បង្ហាញគ្រប់ Unit (Unit 1 - 12)</option>
+                        <option value="unit1">English for You - Unit 1 (មូលដ្ឋានគ្រឹះ)</option>
+                        <option value="unit2">English for You - Unit 2 (អាហារ និងទម្លាប់)</option>
+                        <option value="unit3">English for You - Unit 3 (វប្បធម៌ និងទីក្រុង)</option>
+                        <option value="unit4">English for You - Unit 4 (សុខភាព និងដំបូន្មាន)</option>
+                        <option value="unit5">English for You - Unit 5 (ទេសចរណ៍ និងអតីតកាល)</option>
+                        <option value="unit6">English for You - Unit 6 (វេយ្យាករណ៍កម្រិតខ្ពស់)</option>
+                        <option value="unit7">English for You - Unit 7 (C1: ជំនាញវិជ្ជាជីវៈ)</option>
+                        <option value="unit8">English for You - Unit 8 (C2: ការវិភាគអក្សរសាស្ត្រ)</option>
+                        <option value="unit9">English for You - Unit 9 (IELTS Reading Strategies)</option>
+                        <option value="unit10">English for You - Unit 10 (Academic Writing and Essay Structure)</option>
+                        <option value="unit11">English for You - Unit 11 (Public Speaking and Presentations)</option>
+                        <option value="unit12">English for You - Unit 12 (Mastery Project and Final Review)</option>
+                        <option value="custom">មេរៀនបន្ថែមដោយគ្រូ (Custom)</option>
+                    </select>
+                    <input type="text" id="search-input" class="search-input" placeholder="វាយស្វែងរកមេរៀន (ឧ. Advanced, Discourse, Inversion)..." onkeyup="renderLessons()">
+                </div>
+                <div id="lessons-container"></div>
+            </div>
+        </div>
+
+        <!-- TAB 2: AUTH -->
+        <div id="tab-auth" class="tab-content" style="display: none;">
+            <div class="card">
+                <h2>🔐 ចូលប្រព័ន្ធ និងចុះឈ្មោះ</h2>
+                <div class="auth-shell">
+                    <div class="auth-box">
+                        <h3>ចូលប្រើប្រាស់</h3>
+                        <form id="login-form" onsubmit="handleLogin(event)">
+                            <div class="form-group">
+                                <label>អ៊ីមែល</label>
+                                <input type="email" id="login-email" class="form-control" placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>ពាក្យសម្ងាត់</label>
+                                <input type="password" id="login-password" class="form-control" placeholder="********" required>
+                            </div>
+                            <button type="submit" class="btn">🔑 ចូលប្រើ</button>
+                        </form>
+                        <div id="login-message" class="auth-message"></div>
+                    </div>
+
+                    <div class="auth-box">
+                        <h3>បង្កើតគណនីថ្មី</h3>
+                        <form id="register-form" onsubmit="handleRegister(event)">
+                            <div class="form-group">
+                                <label>ឈ្មោះពេញ</label>
+                                <input type="text" id="register-name" class="form-control" placeholder="ឧ. Sreymom" required>
+                            </div>
+                            <div class="form-group">
+                                <label>អ៊ីមែល</label>
+                                <input type="email" id="register-email" class="form-control" placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>ពាក្យសម្ងាត់</label>
+                                <input type="password" id="register-password" class="form-control" placeholder="********" required>
+                            </div>
+                            <button type="submit" class="btn btn-warning">✨ បង្កើតគណនី</button>
+                        </form>
+                        <div id="register-message" class="auth-message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: PEDAGOGY -->
+        <div id="tab-pedagogy" class="tab-content" style="display: none;">
+            <div class="card">
+                <h2>👨‍🏫 វិធីសាស្ត្របង្រៀនស្ដង់ដារ ៥ ដំណាក់កាល (PPP Model + CLT)</h2>
+                <div class="method-step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>១. នាំអារម្មណ៍ចូលមេរៀន (Warm-up / Lead-in) - ៥ នាទី</h3>
+                        <p>ទាក់ទាញចំណាប់អារម្មណ៍ សួរសំណួរងាយៗទាក់ទងនឹងជីវិតប្រចាំថ្ងៃ ដើម្បីភ្ជាប់ចូលប្រធានបទថ្មី។</p>
+                    </div>
+                </div>
+                <div class="method-step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>២. ណែនាំពាក្យគន្លឹះ និងសំឡេង (Presentation) - ១០ នាទី</h3>
+                        <p>បង្ហាញរូបភាព ពាក្យគន្លឹះ និងឱ្យសិស្សស្តាប់សំឡេង (Audio/TTS) និយាយតាម (*Listen and repeat*)</p>
+                    </div>
+                </div>
+                <div class="method-step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>៣. អនុវត្តការសន្ទនា (Controlled Practice) - ១៥ នាទី</h3>
+                        <p>អានកិច្ចសន្ទនារវាងតួអង្គ និងសិស្សចាប់ដៃគូសន្ទនា (*Role-play*)</p>
+                    </div>
+                </div>
+                <div class="method-step">
+                    <div class="step-num">4</div>
+                    <div>
+                        <h3>៤. ធ្វើលំហាត់អន្តរកម្ម (Free Practice & Quizzes) - ១០ នាទី</h3>
+                        <p>តម្រៀបប្រយោគ បំពេញចន្លោះ និងធ្វើ Quiz ពង្រឹងការយល់ដឹង។</p>
+                    </div>
+                </div>
+                <div class="method-step">
+                    <div class="step-num">5</div>
+                    <div>
+                        <h3>៥. សង្ខេប និងវាយតម្លៃ (Review & Assessment) - ៥ នាទី</h3>
+                        <p>សួរសំណួររំលឹក ផ្តល់មតិកែលម្អ (*Feedback*) និងប្រគល់ផ្កាយលើកទឹកចិត្ត (*Progress Stars*)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: REVIEW HUB -->
+        <div id="tab-review" class="tab-content" style="display: none;">
+            <div class="card">
+                <h2>✍️ ប្រព័ន្ធរំលឹកមេរៀនសរុប និងវាយតម្លៃ (Review & Quiz Hub)</h2>
+                <p style="margin-bottom: 1.5rem;">សាកល្បងចំណេះដឹងរបស់អ្នកពីគ្រប់ Unit ទាំងមូល។</p>
+
+                <div class="review-card">
+                    <h3>សំណួរទី ១ (Unit 7 - Advanced): Inversion Structure</h3>
+                    <p style="margin: 0.8rem 0;"><strong>សំណួរ៖</strong> តើប្រយោគណាមួយប្រើប្រាស់ទម្រង់ Inversion បានត្រឹមត្រូវ?</p>
+                    <button class="quiz-option" onclick="checkReviewAnswer(1, false, this)">ក) Never I have seen such a beautiful temple.</button>
+                    <button class="quiz-option" onclick="checkReviewAnswer(1, true, this)">ខ) Never have I seen such a beautiful temple.</button>
+                    <button class="quiz-option" onclick="checkReviewAnswer(1, false, this)">គ) Have I never seen such a beautiful temple.</button>
+                    <p id="review-msg-1" style="margin-top: 0.8rem; font-weight: bold;"></p>
+                </div>
+
+                <div class="review-card">
+                    <h3>សំណួរទី ២ (Unit 8 - Masterclass): Advanced Conditionals</h3>
+                    <p style="margin: 0.8rem 0;"><strong>សំណួរ៖</strong> "Had they known the risks, they would not have proceeded." តើប្រយោគនេះស្ថិតក្នុងកាលណា?</p>
+                    <button class="quiz-option" onclick="checkReviewAnswer(2, true, this)">ក) Third Conditional (Inverted form)</button>
+                    <button class="quiz-option" onclick="checkReviewAnswer(2, false, this)">ខ) Second Conditional</button>
+                    <button class="quiz-option" onclick="checkReviewAnswer(2, false, this)">គ) First Conditional</button>
+                    <p id="review-msg-2" style="margin-top: 0.8rem; font-weight: bold;"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: MATCHING GAME -->
+        <div id="tab-matching" class="tab-content" style="display: none;">
+            <div class="card">
+                <h2>🎮 លំហាត់ផ្គូផ្គងពាក្យអន្តរកម្ម (Vocabulary Matching Game)</h2>
+                <p style="margin-bottom: 1rem;">ចុចជ្រើសរើសពាក្យភាសាអង់គ្លេស និងការបកប្រែខ្មែរដែលត្រូវគ្នា!</p>
+                <div class="matching-grid" id="matching-container"></div>
+                <p id="match-status" style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem;"></p>
+                <button class="btn" onclick="initMatchingGame()" style="margin-top: 1rem;">🔄 លេងម្តងទៀត (Reset Game)</button>
+            </div>
+        </div>
+
+        <!-- TAB 5: ADMIN & BACKUP -->
+        <div id="tab-admin" class="tab-content" style="display: none;">
+            <div class="card">
+                <h2>🛠️ ផ្ទាំងគ្រប់គ្រង និងបម្រុងទុកទិន្នន័យ (Admin Dashboard & JSON Backup)</h2>
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                    <button class="btn" onclick="exportData()">📥 ទាញយកទិន្នន័យ (Export JSON)</button>
+                    <label class="btn btn-warning" style="cursor: pointer; margin-top: 0;">
+                        📤 បញ្ចូលទិន្នន័យវិញ (Import JSON) <input type="file" id="import-file" style="display: none;" onchange="importData(event)">
+                    </label>
+                    <button class="btn btn-danger" onclick="clearCustomLessons()">🗑️ លុបមេរៀនបន្ថែមទាំងអស់</button>
+                </div>
+
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">បន្ថែមមេរៀនថ្មី (Add Custom Lesson)</h3>
+                <form id="add-lesson-form" onsubmit="addNewLesson(event)">
+                    <div class="form-group">
+                        <label>ចំណងជើងមេរៀន (Unit Title):</label>
+                        <input type="text" id="admin-title" class="form-control" placeholder="ឧ. English for You - Unit X: Advanced C1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>វាក្យសព្ទ (Word: Meaning, ញែកដោយក្បៀស):</label>
+                        <input type="text" id="admin-vocab" class="form-control" placeholder="ឧ. Ubiquitous: ដែលមានគ្រប់ទីកន្លែង, Pragmatic: ដែលមានលក្ខណៈជាក់ស្តែង" required>
+                    </div>
+                    <div class="form-group">
+                        <label>កិច្ចសន្ទនា (Dialogue):</label>
+                        <textarea id="admin-dialogue" class="form-control" rows="3" placeholder="Director: Let's analyze... / នាយក៖ ..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>វេយ្យាករណ៍ (Grammar Focus):</label>
+                        <input type="text" id="admin-grammar" class="form-control" placeholder="ឧ. Advanced Subjunctive Structures" required>
+                    </div>
+                    <div class="form-group">
+                        <label>លំហាត់ (Practice Exercise):</label>
+                        <input type="text" id="admin-exercise" class="form-control" placeholder="ឧ. Rewrite the sentence using inversion..." required>
+                    </div>
+                    <button type="submit" class="btn">💾 រក្សាទុកមេរៀនថ្មី</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 English for You Educational Platform | ក្រសួងអប់រំ យុវជន និងកីឡា (MoEYS and KIZUNA)</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
